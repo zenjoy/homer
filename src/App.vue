@@ -229,6 +229,11 @@ export default {
         }
         this.createStylesheet(stylesheet);
       }
+      if (this.config.scripts) {
+        for (const url of this.config.scripts) {
+          this.addScript(url);
+        }
+      }
     },
     getConfig: function (path = "assets/config.yml") {
       return fetch(path).then((response) => {
@@ -311,6 +316,13 @@ export default {
       let style = document.createElement("style");
       style.appendChild(document.createTextNode(css));
       document.head.appendChild(style);
+    },
+    addScript: function (url) {
+      let script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = url;    
+
+      document.head.appendChild(script);
     },
   },
 };
